@@ -1,0 +1,211 @@
+{
+  "id": "sowatchmk2@jc3213.github",
+  "title": "soWatch! mk2",
+  "name": "sowatchmk2",
+  "version": "1.12.0",
+  "description": "soWatch! w/ Massive Enhancement: youku.com | tudou.com | iqiyi.com | letv.com | pptv.com | sohu.com | qq.com",
+  "main": "index.js",
+  "author": "jc3213",
+  "engines": {
+    "firefox": ">=41.0a1"
+  },
+  "permissions": {
+    "private-browsing": true,
+    "multiprocess": true
+  },
+  "homepage": "https://github.com/jc3213/soWatch/",
+  "updateURL": "https://raw.githubusercontent.com/jc3213/Misc/master/Update/soWatch_mk2.rdf",
+  "updateLink": "https://github.com/jc3213/soWatch/releases/download/1.12.0/sowatch_mk2-1.12.0-fx.xpi",
+  "updateKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8NYE9n9t9hlOg8lttm15fJJ9lyd0sqNcmrCxg2J0fcznCXExKSr5wgGzXzqXMljEV/qHWJdkzqjz2I0WZ7z9PAXmO/aFYfrGHDLrsA+hVAd+35zaaQhK1NzA4t9q1YZc3drjdfQ7WEIPywevA8hbSPTTt28W6FiEVxhISbBkrIQIDAQAB",
+  "license": "LGPL 3.0",
+  "preferences": [
+    {
+      "name": "setDefault",
+      "type": "control",
+      "title": "  ",
+      "label": "Restore All Settings"
+    },
+    {
+      "name": "buttonEnabled",
+      "type": "bool",
+      "title": "Toolbar Button",
+      "value": true
+    },
+    {
+      "name": "updateNext",
+      "type": "integer",
+      "title": "Next Auto Update Time",
+      "value": 0,
+      "hidden": true
+    },
+    {
+      "name": "updatePeriod",
+      "type": "integer",
+      "title": "Period *day*",
+      "value": 8
+    },
+    {
+      "name": "getUpdate",
+      "type": "control",
+      "title": "  ",
+      "label": "Run Manual Update"
+    },
+    {
+      "name": "fileLocal",
+      "type": "bool",
+      "title": "Toggle Local Players",
+      "value": true
+    },
+    {
+      "name": "fileFolder",
+      "type": "directory",
+      "title": "Defined Local Directory"
+    },
+    {
+      "name": "fileServer",
+      "type": "string",
+      "title": "Defined Remote Server",
+      "value": ""
+    },
+    {
+      "name": "youkuSetting",
+      "type": "menulist",
+      "title": "Option: Youku.com",
+      "value": 0,
+      "options": [
+        {
+          "value": 1,
+          "label": "Player"
+        },
+        {
+          "value": 2,
+          "label": "Filter"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "name": "tudouSetting",
+      "type": "menulist",
+      "title": "Option: Tudou.com",
+      "value": 0,
+      "options": [
+        {
+          "value": 1,
+          "label": "Player"
+        },
+        {
+          "value": 2,
+          "label": "Filter"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "name": "iqiyiSetting",
+      "type": "menulist",
+      "title": "Option: iQiyi.com",
+      "value": 0,
+      "options": [
+        {
+          "value": 1,
+          "label": "Player"
+        },
+        {
+          "value": 2,
+          "label": "Filter"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "name": "letvSetting",
+      "type": "menulist",
+      "title": "Option: Letv.com",
+      "value": 0,
+      "options": [
+        {
+          "value": 1,
+          "label": "Player"
+        },
+        {
+          "value": 2,
+          "label": "Filter"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "name": "sohuSetting",
+      "type": "menulist",
+      "title": "Option: Sohu.com",
+      "value": 0,
+      "options": [
+        {
+          "value": 1,
+          "label": "Player"
+        },
+        {
+          "value": 2,
+          "label": "Filter"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "name": "pptvSetting",
+      "type": "menulist",
+      "title": "Option: PPTV.com",
+      "value": 0,
+      "options": [
+        {
+          "value": 1,
+          "label": "Player"
+        },
+        {
+          "value": 2,
+          "label": "Filter"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "name": "qqSetting",
+      "type": "menulist",
+      "title": "Option: QQ.com",
+      "value": 0,
+      "options": [
+        {
+          "value": 1,
+          "label": "Player"
+        },
+        {
+          "value": 2,
+          "label": "Filter"
+        },
+        {
+          "value": 0,
+          "label": "None"
+        }
+      ]
+    }
+  ]
+}
