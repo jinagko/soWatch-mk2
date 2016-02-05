@@ -66,7 +66,7 @@ exports.pendingOption = function () {
 
     if (Storage.website[i].value > 2) Preference.resetValue(Storage.website[i].prefs);
   }
-}
+};
 exports.setDefault = function () {
   for (var i in Storage.option) {
     if (Storage.option[i].ignore) continue;
