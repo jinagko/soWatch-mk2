@@ -32,7 +32,7 @@ function createButton(document) {
 
 function createTopItem(document, popup) {
   Storage.menuitem.forEach(function (element, index, array) {
-    var name = Storage.menuitem[index][0], type = Storage.menuitem[index][1];
+    var name = element[0], type = element[1];
     var item = document.createElement("menuitem");
     item.setAttribute("id", "sowatchmk2-" + name);
     item.setAttribute("class", "menuitem-iconic");
@@ -78,7 +78,7 @@ function createSubItem(document, popup) {
 
 function menuClick(event) {
   Storage.menuitem.forEach(function (element, index, array) {
-    var name = Storage.menuitem[index][0], type = Storage.menuitem[index][1];
+    var name = element[0], type = element[1];
     if (event.target.id == "sowatchmk2-" + name) {
       if (type == "command") {
         Worker[name]();
@@ -106,7 +106,7 @@ function menuClick(event) {
 function menuPopup(event) {
   if (event.target.id == "sowatchmk2-popup") {
     Storage.menuitem.forEach(function (element, index, array) {
-      var name = Storage.menuitem[index][0], type = Storage.menuitem[index][1];
+      var name = element[0], type = element[1];
       if (type == "boolean") {
         if (Storage.option[name].value) event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "true");
         else event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "false");
