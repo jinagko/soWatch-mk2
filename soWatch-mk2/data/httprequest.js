@@ -91,13 +91,10 @@ var HttpRequest = {
     for (var i in Storage.player) {
       var rule = Storage.player[i];
       if (rule["target"] && rule["target"].matches(httpChannel.URI)) {
-        var fn = this, args = Array.prototype.slice.call(arguments);
-        if (typeof rule["preHandle"] == "function") rule["preHandle"].apply(fn, args);
         if (!rule["storageStream"] || !rule["count"]) {
           httpChannel.suspend();;
           getPlayer(Storage.option.fileLocal.value, rule, function () {
             httpChannel.resume();
-            if (typeof rule["callback"] == "function") rule["callback"].apply(fn, args);
           });
         }
         var newListener = new TrackingListener();
