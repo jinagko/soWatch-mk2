@@ -9,6 +9,7 @@ var {Cu} = require("chrome");
 var {CustomizableUI} = Cu.import("resource:///modules/CustomizableUI.jsm", {});
 
 var cssFile = Services.io.newURI(require("sdk/self").data.url("toolbar.css"), null, null);
+var buttonClick = new Array();
 var iconShown = false;
 
 function createButton(document) {
@@ -32,21 +33,22 @@ function createButton(document) {
 
 function createTopItem(document, popup) {
   Storage.menuitem.forEach(function (element, index, array) {
-    var name = element[0], type = element[1];
-    var item = document.createElement("menuitem");
-    item.setAttribute("id", "sowatchmk2-" + name);
-    item.setAttribute("class", "menuitem-iconic");
-    if (type == "boolean") {
-      item.setAttribute("label", Locales(name + "_title"));
-      item.setAttribute("type", "checkbox");
-    } else if (type == "command") {
-      item.setAttribute("label", Locales(name + "_label"));
-    }
-    popup.appendChild(item);
-
+    element.forEach(function (_element, _index, _array) {
+      var name = _element[0], type = _element[1];
+      var item = document.createElement("menuitem");
+      item.setAttribute("id", "sowatchmk2-" + name);
+      item.setAttribute("class", "menuitem-iconic");
+      if (type == "boolean") {
+        item.setAttribute("label", Locales(name + "_title"));
+        item.setAttribute("type", "checkbox");
+      } else if (type == "command") {
+        item.setAttribute("label", Locales(name + "_label"));
+      }
+      popup.appendChild(item);
+    });
     if (index < array.length - 1) {
       var separator = document.createElement("menuseparator");
-      separator.setAttribute("id", "sowatchmk2-separator-" + name);
+      separator.setAttribute("id", "sowatchmk2-separator-" + index);
       popup.appendChild(separator);
     }
   });
@@ -77,7 +79,7 @@ function createSubItem(document, popup) {
 }
 
 function menuClick(event) {
-  Storage.menuitem.forEach(function (element, index, array) {
+  Storage.button.forEach(function (element, index, array) {
     var name = element[0], type = element[1];
     if (event.target.id == "sowatchmk2-" + name) {
       if (type == "command") {
@@ -105,7 +107,7 @@ function menuClick(event) {
 
 function menuPopup(event) {
   if (event.target.id == "sowatchmk2-popup") {
-    Storage.menuitem.forEach(function (element, index, array) {
+    Storage.button.forEach(function (element, index, array) {
       var name = element[0], type = element[1];
       if (type == "boolean") {
         if (Storage.option[name].value) event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "true");
