@@ -7,8 +7,8 @@ var Preference = require("../lib/pref-utils.js");
 var Synchronize = require("../lib/sync.js");
 
 function getRule(rulelist) {
-  for (var i in rulelist) {
-    var name = rulelist[i][0], player = rulelist[i][1], remote = rulelist[i][2], filter = rulelist[i][3], string = rulelist[i][4];
+  rulelist.forEach(function (element, index, array) {
+    var name = element[0], player = element[1], remote = element[2], filter = element[3], string = element[4];
     if (player != undefined) {
       if (!remote) {
         Storage.player[name] = {
@@ -29,20 +29,19 @@ function getRule(rulelist) {
         pattern: Pattern.fromString(string)
       };
     }
-  }
+  });
 }
 
 function setRule(state, type, rulelist) {
-  for (var i in rulelist) {
-    var name = rulelist[i][0];
-    var object = Storage[type][name];
+  rulelist.forEach(function (element, index, array) {
+    var object = Storage[type][element[0]];
     if (state == "on") {
       object["target"] = object["pattern"];
     }
     if (state == "off") {
       object["target"] = null;
     }
-  }
+  });
 }
 
 exports.pendingOption = function () {
