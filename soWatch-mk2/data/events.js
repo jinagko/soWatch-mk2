@@ -8,25 +8,31 @@ var Preference = require("../lib/pref-utils.js");
 var Worker = require("./worker.js");
 var Toolbar = require("./toolbar.js");
 
-var buttonListener = new Array();
+function menuAndButton(name, type, order) {
+  Storage.button.push([name, type]);
+  if (Storage.menuitem[order]) {
+    Storage.menuitem[order].push([name, type]);
+  } else {
+    Storage.menuitem[order] = [[name, type]];
+  }
+}
 
 function readList() {
   Rulelist.option.forEach(function (element, index, array) {
-    var name = element[0], value = element[1], ignore = element[2], menuitem = element[3];
-    if (value == "command") {
-      buttonListener.push(name);
-    } else {
+    var name = element[0], value = element[1], ignore = element[2], order = element[3];
+    if (value != "command") {
       Storage.option[name] = {
         prefs: {name: name, value: value},
         ignore: ignore
       };
     }
 
-    if (menuitem) {
+    if (typeof order == "number") {
       if (value == "command") {
-        Storage.menuitem.push([name, "command"]);
+        menuAndButton(name, "command", order);
       } else if (typeof value == "boolean") {
-        Storage.menuitem.push([name, "boolean"]);
+        var type = "boolean";
+        menuAndButton(name, "boolean", order);
       }
     }
   });
@@ -87,14 +93,20 @@ exports.startup = function () {
   readList();
   readOption();
   Preference.addListener("", readOption);
-  buttonListener.forEach(function (element, index, array) {
-    Preference.addListener(element, Worker[element]);
+  Storage.button.forEach(function (element, index, array) {
+    var name = element[0], type = element[1];
+    if (type == "command") {
+      Preference.addListener(name, Worker[name]);
+    }
   });
 };
 exports.shutdown = function () {
   Toolbar.remove();
   Preference.removeListener("", readOption);
-  buttonListener.forEach(function (element, index, array) {
-    Preference.removeListener(element, Worker[element]);
+  Storage.button.forEach(function (element, index, array) {
+    var name = element[0], type = element[1];
+    if (type == "command") {
+      Preference.removeListener(name, Worker[name]);
+    }
   });
 };
