@@ -9,7 +9,6 @@ var {Cu} = require("chrome");
 var {CustomizableUI} = Cu.import("resource:///modules/CustomizableUI.jsm", {});
 
 var cssFile = Services.io.newURI(require("sdk/self").data.url("toolbar.css"), null, null);
-var buttonClick = new Array();
 var iconShown = false;
 
 function createButton(document) {
