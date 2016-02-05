@@ -12,7 +12,7 @@ var buttonListener = new Array();
 
 function readList() {
   Rulelist.option.forEach(function (element, index, array) {
-    var name = Rulelist.option[index][0], value = Rulelist.option[index][1], ignore = Rulelist.option[index][2], menuitem = Rulelist.option[index][3];
+    var name = element[0], value = element[1], ignore = element[2], menuitem = element[3];
     if (value == "command") {
       buttonListener.push(name);
     } else {
@@ -32,7 +32,7 @@ function readList() {
   });
 
   Rulelist.website.forEach(function (element, index, array) {
-    var name = Rulelist.website[index][0], value = Rulelist.website[index][1], address = Rulelist.website[index][2], player = Rulelist.website[index][3], filter = Rulelist.website[index][4];
+    var name = element[0], value = element[1], address = element[2], player = element[3], filter = element[4];
     Storage.website[name] = {
       prefs: {name: name + "Setting", value: value},
       onSite: Pattern.fromURL(address),
@@ -46,19 +46,20 @@ function readList() {
 
 function handleWrapper() {
   Rulelist.wrapper.forEach(function (element, index, array) {
-    var entry = Rulelist.wrapper[index][0], major = Rulelist.wrapper[index][1], minor = Rulelist.wrapper[index][2];
-    for (var r in minor) {
+    var entry = element[0], major = element[1], minor = element[2];
+    minor.forEach(function (element, index, array) {
+      major = Storage.website[major], minor = Storage.website[element];
       if (entry == "player") {
-        if ((Storage.website[major].value == 1 && Storage.website[minor[r]].value != 1) || (Storage.website[major].value != 1 && Storage.website[minor[r]].value == 1)) {
-          Preference.setValue(Storage.website[minor[r]].prefs.name, Storage.website[major].value);
+        if ((major.value == 1 && minor.value != 1) || (major.value != 1 && minor.value == 1)) {
+          Preference.setValue(minor.prefs.name, major.value);
         }
       }
       if (entry == "filter") {
-        if ((Storage.website[major].value == 2 && Storage.website[minor[r]].value == 0) || (Storage.website[major].value == 0 && Storage.website[minor[r]].value == 2)) {
-          Preference.setValue(Storage.website[minor[r]].prefs.name, Storage.website[major].value);
+        if ((major.value == 2 && minor.value == 0) || (major.value == 0 && minor.value == 2)) {
+          Preference.setValue(minor.prefs.name, major.value);
         }
       }
-    }
+    });
   });
 }
 
