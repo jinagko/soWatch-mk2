@@ -55,9 +55,9 @@ function createTopItem(document, popup) {
 
 function createSubItem(document, popup) {
   var childList = {
-    Player: "Setting_options.Player",
-    Filter: "Setting_options.Filter",
-    None: "Setting_options.None"
+    Player: "_options.Player",
+    Filter: "_options.Filter",
+    None: "_options.None"
   };
 
   for (var x in Storage.website) {
