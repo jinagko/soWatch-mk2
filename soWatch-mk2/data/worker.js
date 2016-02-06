@@ -67,7 +67,7 @@ exports.pendingOption = function () {
     if (Storage.website[i].value > 2) Preference.resetValue(Storage.website[i].prefs);
   }
 };
-exports.setDefault = function () {
+exports.restore = function () {
   for (var i in Storage.option) {
     if (Storage.option[i].ignore) continue;
     Preference.resetValue(Storage.option[i].prefs);
@@ -76,8 +76,8 @@ exports.setDefault = function () {
     Preference.resetValue(Storage.website[x].prefs);
   }
 };
-exports.getUpdate = function (state) {
-  if (state && Storage.option.updateNext.value > Storage.when) return;
+exports.manual = function (state) {
+  if (state && Storage.option.next.value > Storage.when) return;
 
   for (var i in Storage.player) {
     if ("ranged" in Storage.player[i]) {
@@ -86,5 +86,5 @@ exports.getUpdate = function (state) {
       Synchronize.fetch(link, file, 0);
     }
   }
-  Preference.setValue(Storage.option["updateNext"].prefs.name, Storage.when + Storage.option.updatePeriod.value * 86400);
+  Preference.setValue(Storage.option.next.prefs.name, Storage.when + Storage.option.period.value * 86400);
 };
