@@ -40,7 +40,7 @@ function readList() {
   Rulelist.website.forEach(function (element, index, array) {
     var name = element[0], value = element[1], address = element[2], player = element[3], filter = element[4];
     Storage.website[name] = {
-      prefs: {name: name + "Setting", value: value},
+      prefs: {name: name, value: value},
       onSite: Pattern.fromURL(address),
       hasPlayer: player[0],
       player: player[1],
@@ -74,19 +74,19 @@ function readOption() {
     Storage.option[i].value = Preference.getValue(Storage.option[i].prefs.name);
   }
 
-  if (Storage.option.fileServer.value) Storage.file.link = Storage.option.fileServer.value;
+  if (Storage.option.server.value) Storage.file.link = Storage.option.server.value;
   else Storage.file.link = FileIO.server;
 
-  if (Storage.option.fileFolder.value) Storage.file.path = FileIO.toURI(Storage.option.fileFolder.value);
+  if (Storage.option.folder.value) Storage.file.path = FileIO.toURI(Storage.option.folder.value);
   else Storage.file.path = FileIO.toURI(FileIO.folder);
 
   Worker.pendingOption();
   handleWrapper();
 
-  if (Storage.option.buttonEnabled.value) Toolbar.create();
+  if (Storage.option.button.value) Toolbar.create();
   else Toolbar.remove();
 
-  Worker.getUpdate("auto");
+  Worker.manual("auto");
 };
 
 exports.startup = function () {
