@@ -9,7 +9,7 @@ var Worker = require("./worker.js");
 var Toolbar = require("./toolbar.js");
 
 function menuAndButton(name, type, order) {
-  Storage.button.push([name, type]);
+  Storage.command.push([name, type]);
   if (Storage.menuitem[order]) {
     Storage.menuitem[order].push([name, type]);
   } else {
@@ -93,7 +93,7 @@ exports.startup = function () {
   readList();
   readOption();
   Preference.addListener("", readOption);
-  Storage.button.forEach(function (element, index, array) {
+  Storage.command.forEach(function (element, index, array) {
     var name = element[0], type = element[1];
     if (type == "command") {
       Preference.addListener(name, Worker[name]);
@@ -103,7 +103,7 @@ exports.startup = function () {
 exports.shutdown = function () {
   Toolbar.remove();
   Preference.removeListener("", readOption);
-  Storage.button.forEach(function (element, index, array) {
+  Storage.command.forEach(function (element, index, array) {
     var name = element[0], type = element[1];
     if (type == "command") {
       Preference.removeListener(name, Worker[name]);
