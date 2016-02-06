@@ -93,7 +93,7 @@ var HttpRequest = {
       if (rule["target"] && rule["target"].matches(httpChannel.URI)) {
         if (!rule["storageStream"] || !rule["count"]) {
           httpChannel.suspend();;
-          getPlayer(Storage.option.fileLocal.value, rule, function () {
+          getPlayer(Storage.option.offline.value, rule, function () {
             httpChannel.resume();
           });
         }
