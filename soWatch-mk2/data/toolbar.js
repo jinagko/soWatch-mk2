@@ -55,30 +55,30 @@ function createTopItem(document, popup) {
 
 function createSubItem(document, popup) {
   var childList = {
-    Player: "_options.Player",
-    Filter: "_options.Filter",
-    None: "_options.None"
+    player: "_options.Player",
+    filter: "_options.Filter",
+    none: "_options.None"
   };
 
-  for (var x in Storage.website) {
+  for (var i in Storage.website) {
     var separator = document.createElement("menuseparator");
-    separator.setAttribute("id", "sowatchmk2-separator-" + x);
+    separator.setAttribute("id", "sowatchmk2-separator-" + i);
     popup.appendChild(separator);
 
-    for (var r in childList) {
+    for (var x in childList) {
       var item = document.createElement("menuitem");
-      item.setAttribute("id", "sowatchmk2-" + x + r);
-      item.setAttribute("label", Locales(x + childList[r]));
+      item.setAttribute("id", "sowatchmk2-" + i + "-" + x);
+      item.setAttribute("label", Locales(i + childList[x]));
       item.setAttribute("type", "radio");
-      if (!Storage.website[x].hasPlayer && r == "Player") item.setAttribute("disabled", "true");
-      if (!Storage.website[x].hasFilter && r == "Filter") item.setAttribute("disabled", "true");
+      if (!Storage.website[i].hasPlayer && x == "player") item.setAttribute("disabled", "true");
+      if (!Storage.website[i].hasFilter && x == "filter") item.setAttribute("disabled", "true");
       popup.appendChild(item);
     }
   }
 }
 
 function menuClick(event) {
-  Storage.button.forEach(function (element, index, array) {
+  Storage.command.forEach(function (element, index, array) {
     var name = element[0], type = element[1];
     if (event.target.id == "sowatchmk2-" + name) {
       if (type == "command") {
@@ -90,15 +90,15 @@ function menuClick(event) {
     }
   });
 
-  for (var x in Storage.website) {
-    var website = Storage.website[x];
-    if (event.target.id == "sowatchmk2-" + x + "Player") {
+  for (var i in Storage.website) {
+    var website = Storage.website[i];
+    if (event.target.id == "sowatchmk2-" + i + "-player") {
       if (!website.hasPlayer) continue;
       Preference.setValue(website.prefs.name, 1);
-    } else if (event.target.id == "sowatchmk2-" + x + "Filter") {
+    } else if (event.target.id == "sowatchmk2-" + i + "-filter") {
       if (!website.hasFilter) continue;
       Preference.setValue(website.prefs.name, 2);
-    } else if (event.target.id == "sowatchmk2-" + x + "None") {
+    } else if (event.target.id == "sowatchmk2-" + i + "-none") {
       Preference.setValue(website.prefs.name, 0);
     }
   }
@@ -106,7 +106,7 @@ function menuClick(event) {
 
 function menuPopup(event) {
   if (event.target.id == "sowatchmk2-popup") {
-    Storage.button.forEach(function (element, index, array) {
+    Storage.command.forEach(function (element, index, array) {
       var name = element[0], type = element[1];
       if (type == "boolean") {
         if (Storage.option[name].value) event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "true");
@@ -114,26 +114,26 @@ function menuPopup(event) {
       }
     });
 
-    for (var x in Storage.website) {
-      var website = Storage.website[x];
+    for (var i in Storage.website) {
+      var website = Storage.website[i];
       if (!website["onSite"].matches(event.target.ownerDocument.getElementById("content").currentURI) && !website.popup) {
-        event.target.querySelector("#sowatchmk2-separator-" + x).setAttribute("hidden", "true");
-        event.target.querySelector("#sowatchmk2-" + x + "Player").setAttribute("hidden", "true");
-        event.target.querySelector("#sowatchmk2-" + x + "Filter").setAttribute("hidden", "true");
-        event.target.querySelector("#sowatchmk2-" + x + "None").setAttribute("hidden", "true");
+        event.target.querySelector("#sowatchmk2-separator-" + i).setAttribute("hidden", "true");
+        event.target.querySelector("#sowatchmk2-" + i + "-player").setAttribute("hidden", "true");
+        event.target.querySelector("#sowatchmk2-" + i + "-filter").setAttribute("hidden", "true");
+        event.target.querySelector("#sowatchmk2-" + i + "-none").setAttribute("hidden", "true");
       } else {
-        event.target.querySelector("#sowatchmk2-separator-" + x).setAttribute("hidden", "false");
-        event.target.querySelector("#sowatchmk2-" + x + "Player").setAttribute("hidden", "false");
-        event.target.querySelector("#sowatchmk2-" + x + "Filter").setAttribute("hidden", "false");
-        event.target.querySelector("#sowatchmk2-" + x + "None").setAttribute("hidden", "false");
+        event.target.querySelector("#sowatchmk2-separator-" + i).setAttribute("hidden", "false");
+        event.target.querySelector("#sowatchmk2-" + i + "-player").setAttribute("hidden", "false");
+        event.target.querySelector("#sowatchmk2-" + i + "-filter").setAttribute("hidden", "false");
+        event.target.querySelector("#sowatchmk2-" + i + "-none").setAttribute("hidden", "false");
       }
 
       if (website.value == 1) {
-        event.target.querySelector("#sowatchmk2-" + x + "Player").setAttribute("checked", "true");
+        event.target.querySelector("#sowatchmk2-" + i + "-player").setAttribute("checked", "true");
       } else if (website.value == 2) {
-        event.target.querySelector("#sowatchmk2-" + x + "Filter").setAttribute("checked", "true");
+        event.target.querySelector("#sowatchmk2-" + i + "-filter").setAttribute("checked", "true");
       } else if (website.value == 0) {
-        event.target.querySelector("#sowatchmk2-" + x + "None").setAttribute("checked", "true");
+        event.target.querySelector("#sowatchmk2-" + i + "-none").setAttribute("checked", "true");
       }
     }
   }
