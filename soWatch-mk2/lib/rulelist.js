@@ -3,14 +3,14 @@
 exports.option = [
   /** Name, Value, Not Reset, Toolbar group | sort order will affect order in toolbar
       设置名, 预设值, 无视重置, 工具栏中的分组 | 排列顺序将影响在工具栏中的顺序 */
-  ["setDefault", "command", false, 0],
-  ["buttonEnabled", true, false, null],
-  ["updateNext", 0, true, null],
-  ["updatePeriod", 8, false, null],
-  ["getUpdate", "command", false, 2],
-  ["fileLocal", true, false, 1],
-  ["fileServer", "", true, null],
-  ["fileFolder", "", true, null]
+  ["restore", "command", false, 0],
+  ["button", true, false, null],
+  ["next", 0, true, null],
+  ["period", 8, false, null],
+  ["manual", "command", false, 2],
+  ["offline", true, false, 1],
+  ["server", "", true, null],
+  ["folder", "", true, null]
 ];
 exports.website = [
   /** Name, Pref.value, Host, [hasPlayer, [Player Rule]], [hasFilter, [Filter Rule]]
