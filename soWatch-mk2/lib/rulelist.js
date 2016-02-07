@@ -5,9 +5,9 @@ exports.option = [
       设置名, 预设值, 无视重置, 工具栏中的分组 | 排列顺序将影响在工具栏中的顺序 */
   ["restore", "command", false, 0],
   ["button", true, false, null],
-  ["next", 0, true, null],
+  ["update", 0, true, null],
   ["period", 8, false, null],
-  ["manual", "command", false, 2],
+  ["download", "command", false, 2],
   ["offline", true, false, 1],
   ["server", "", true, null],
   ["folder", "", true, null]
