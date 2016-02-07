@@ -76,8 +76,8 @@ exports.restore = function () {
     Preference.resetValue(Storage.website[x].prefs);
   }
 };
-exports.manual = function (state) {
-  if (state && Storage.option.next.value > Storage.when) return;
+exports.download = function (state) {
+  if (state && Storage.option['update'].value > Storage.when) return;
 
   for (var i in Storage.player) {
     if ("ranged" in Storage.player[i]) {
@@ -86,5 +86,5 @@ exports.manual = function (state) {
       Synchronize.fetch(link, file, 0);
     }
   }
-  Preference.setValue(Storage.option.next.prefs.name, Storage.when + Storage.option.period.value * 86400);
+  Preference.setValue(Storage.option['update'].prefs.name, Storage.when + Storage.option['period'].value * 86400);
 };
