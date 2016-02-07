@@ -32,7 +32,7 @@
       "value": true
     },
     {
-      "name": "next",
+      "name": "update",
       "type": "integer",
       "title": "Next Update Time",
       "value": 0,
@@ -45,7 +45,7 @@
       "value": 8
     },
     {
-      "name": "manual",
+      "name": "download",
       "type": "control",
       "title": "  ",
       "label": "Manual Update"
