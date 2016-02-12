@@ -18,8 +18,6 @@ exports.website = [
     [true, [["youku_loader", "loader.swf", true, null, "http://static.youku.com/*/v/swf/loader*.swf*"], ["youku_player", "player.swf", true, null, "http://static.youku.com/*/v/swf/*player*.swf*"]]],
     [true, [["youku_filter", null, null, true, "http://*.atm.youku.com/v*?vip=*"]]]
   ],
-/**  Template End
-     模板结束  */
   [
     "tudou",
     0,
