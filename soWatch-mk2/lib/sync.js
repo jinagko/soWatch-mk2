@@ -8,7 +8,7 @@ function fetch(link, file, probe) {
   if (probe > 3) return;
 
   probe ++;
-  var temp = file + "_sotemp"; // 因为Downloads.jsm并不能直接覆盖原文件所以需要使用临时文件
+  var temp = file + "_sotemp";
   Downloads.fetch(link, temp, {isPrivate: true}).then(
     function onSuccess() {
       FileIO.copyFile(temp, file);
