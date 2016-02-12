@@ -1,8 +1,6 @@
 "use strict";
 
 exports.option = [
-  /** Name, Value, Not Reset, Toolbar group | sort order will affect order in toolbar
-      设置名, 预设值, 无视重置, 工具栏中的分组 | 排列顺序将影响在工具栏中的顺序 */
   ["restore", "command", false, 0],
   ["button", true, false, null],
   ["update", 0, true, null],
@@ -13,14 +11,10 @@ exports.option = [
   ["folder", "", true, null]
 ];
 exports.website = [
-  /** Name, Pref.value, Host, [hasPlayer, [Player Rule]], [hasFilter, [Filter Rule]]
-      名称, 设置预设值, 域名, [判断播放器, [播放器规则表]], [判断过滤, [过滤规则表]] */
   [
-    "youku", // package.json 设置名 youkuSetting , 添加时请注意格式
-    0, // 默认规则： 0,禁用
-    "http://www.youku.com/", // 域名
-           /** RuleName, Player File, hasRemote, isSecured, Pattern
-               规则名称, 播放器文件名, 判断远程播放器, 判断安全过滤, 匹配对象 */
+    "youku",
+    0,
+    "http://www.youku.com/",
     [true, [["youku_loader", "loader.swf", true, null, "http://static.youku.com/*/v/swf/loader*.swf*"], ["youku_player", "player.swf", true, null, "http://static.youku.com/*/v/swf/*player*.swf*"]]],
     [true, [["youku_filter", null, null, true, "http://*.atm.youku.com/v*?vip=*"]]]
   ],
@@ -70,7 +64,5 @@ exports.website = [
   ]
 ];
 exports.wrapper = [
-  /** Rule Type, Major, Sub-object
-      规则类型, 主要参考, 次要对象 */
   ["filter", "youku", ["tudou"]]
 ];
