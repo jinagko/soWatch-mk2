@@ -14,23 +14,19 @@ function getFilter(rule, request) {
   else request.cancel(Cr.NS_BINDING_ABORTED);
 }
 
-function getPlayer(local, rule, callback) {
-  if (local) var object = rule["device"];
-  else var object = rule["ranged"];
-
+function getPlayer(object, rule, request) {
+  request.suspend();
   NetUtil.asyncFetch(object, function (inputStream, status) {
     var binaryOutputStream = Cc["@mozilla.org/binaryoutputstream;1"].createInstance(Ci.nsIBinaryOutputStream);
     var storageStream = Cc["@mozilla.org/storagestream;1"].createInstance(Ci.nsIStorageStream);
     var count = inputStream.available();
     var data = NetUtil.readInputStreamToString(inputStream, count);
-      storageStream.init(512, count, null);
-      binaryOutputStream.setOutputStream(storageStream.getOutputStream(0));
-      binaryOutputStream.writeBytes(data, count);
-      rule["storageStream"] = storageStream;
-      rule["count"] = count;
-    if (typeof callback == "function") {
-      callback();
-    }
+    storageStream.init(512, count, null);
+    binaryOutputStream.setOutputStream(storageStream.getOutputStream(0));
+    binaryOutputStream.writeBytes(data, count);
+    rule["storageStream"] = storageStream;
+    rule["count"] = count;
+    request.resume();
   });
 }
 
@@ -78,7 +74,7 @@ var HttpRequest = {
     if (!swf.matches(httpChannel.URI) && !xml.matches(httpChannel.URI)) return;
 
     for (var i in Storage.website) {
-      if (Storage.website[i]["onSite"].matches(httpChannel.URI)) {
+      if (Storage.website[i].onSite.matches(httpChannel.URI)) {
         if (i == "iqiyi") { // issues #7 前置补丁
           this.iqiyi = 0;
         }
@@ -92,10 +88,11 @@ var HttpRequest = {
       var rule = Storage.player[i];
       if (rule["target"] && rule["target"].matches(httpChannel.URI)) {
         if (!rule["storageStream"] || !rule["count"]) {
-          httpChannel.suspend();;
-          getPlayer(Storage.option['offline'].value, rule, function () {
-            httpChannel.resume();
-          });
+          if (Storage.option["offline"].value) {
+            getPlayer(rule.offline, rule, httpChannel);
+          } else {
+            getPlayer(rule.online, rule, httpChannel);
+		  }
         }
         var newListener = new TrackingListener();
         subject.QueryInterface(Ci.nsITraceableChannel);
