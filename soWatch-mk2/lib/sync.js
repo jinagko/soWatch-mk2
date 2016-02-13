@@ -6,8 +6,8 @@ var {Downloads} = Cu.import("resource://gre/modules/Downloads.jsm", {});
 
 function fetch(link, file, probe) {
   probe = probe || 0;
-  probe ++;
   if (probe > 3) return;
+  probe ++;
 
   var temp = file + "_sotemp";
   Downloads.fetch(link, temp, {isPrivate: true}).then(
