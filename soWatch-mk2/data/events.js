@@ -74,19 +74,19 @@ function readOption() {
     Storage.option[i].value = Preference.getValue(Storage.option[i].prefs.name);
   }
 
-  if (Storage.option['server'].value) Storage.file.link = Storage.option['server'].value;
+  if (Storage.option["server"].value) Storage.file.link = Storage.option["server"].value;
   else Storage.file.link = FileIO.server;
 
-  if (Storage.option['folder'].value) Storage.file.path = FileIO.toURI(Storage.option['folder'].value);
+  if (Storage.option["folder"].value) Storage.file.path = FileIO.toURI(Storage.option["folder"].value);
   else Storage.file.path = FileIO.toURI(FileIO.folder);
 
   Worker.pendingOption();
   handleWrapper();
 
-  if (Storage.option['button'].value) Toolbar.create();
+  if (Storage.option["button"].value) Toolbar.create();
   else Toolbar.remove();
 
-  Worker['download']("auto");
+  Worker["download"]("auto");
 };
 
 exports.startup = function () {
