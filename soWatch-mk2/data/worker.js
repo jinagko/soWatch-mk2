@@ -12,13 +12,13 @@ function getRule(rulelist) {
     if (player != undefined) {
       if (!remote) {
         Storage.player[name] = {
-          device: player,
+          offline: player,
           pattern: Pattern.fromString(string)
         };
       } else {
           Storage.player[name] = {
-          device: Storage.file.path + player,
-          ranged: Storage.file.link + player,
+          offline: Storage.file.path + player,
+          online: Storage.file.link + player,
           pattern: Pattern.fromString(string)
         };
       }
@@ -77,14 +77,14 @@ exports.restore = function () {
   }
 };
 exports.download = function (state) {
-  if (state && Storage.option['update'].value > Storage.when) return;
+  if (state && Storage.option["update"].value > Storage.when) return;
 
   for (var i in Storage.player) {
-    if ("ranged" in Storage.player[i]) {
-      var link = Storage.player[i]["ranged"];
-      var file = FileIO.toPath(Storage.player[i]["device"]);
-      Synchronize.fetch(link, file, 0);
+    if ("online" in Storage.player[i]) {
+      var link = Storage.player[i]["online"];
+      var file = FileIO.toPath(Storage.player[i]["offline"]);
+      Synchronize.fetch(link, file);
     }
   }
-  Preference.setValue(Storage.option['update'].prefs.name, Storage.when + Storage.option['period'].value * 86400);
+  Preference.setValue(Storage.option["update"].prefs.name, Storage.when + Storage.option["period"].value * 86400);
 };
