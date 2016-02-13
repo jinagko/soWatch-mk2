@@ -92,7 +92,7 @@ var HttpRequest = {
             getPlayer(rule.offline, rule, httpChannel);
           } else {
             getPlayer(rule.online, rule, httpChannel);
-		  }
+          }
         }
         var newListener = new TrackingListener();
         subject.QueryInterface(Ci.nsITraceableChannel);
