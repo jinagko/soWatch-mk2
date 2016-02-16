@@ -2,7 +2,7 @@
   "id": "sowatchmk2@jc3213.github",
   "title": "soWatch! mk2",
   "name": "sowatchmk2",
-  "version": "1.12.3",
+  "version": "1.12.4",
   "description": "This add-on intends to improve the user experience of Chinese video sites. It also has a high risk of violating the local law of China. Use at your own risk!",
   "main": "index.js",
   "author": "jc3213",
@@ -13,9 +13,17 @@
     "private-browsing": true,
     "multiprocess": true
   },
+  "locales": {
+    "ja": {
+      "description": "中華動画サイトのユーザー体験を改善するアドオンです、中華本土の法律に違反するリスクがあるため、自己責任で使用してください！"
+    },
+    "zh-CN": {
+      "description": "本扩展旨在改进中国境内的视频网站的用户体验，它很可能会触犯中国国内的法律， 用户需自行承担使用风险！"
+    }
+  },
   "homepage": "https://github.com/jc3213/soWatch-mk2/",
   "updateURL": "https://raw.githubusercontent.com/jc3213/Misc/master/Update/soWatch_mk2.rdf",
-  "updateLink": "https://github.com/jc3213/soWatch-mk2/releases/download/1.12.3/sowatch_mk2-1.12.3-fx.xpi",
+  "updateLink": "https://github.com/jc3213/soWatch-mk2/releases/download/1.12.4/sowatch_mk2-1.12.4-fx.xpi",
   "updateKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8NYE9n9t9hlOg8lttm15fJJ9lyd0sqNcmrCxg2J0fcznCXExKSr5wgGzXzqXMljEV/qHWJdkzqjz2I0WZ7z9PAXmO/aFYfrGHDLrsA+hVAd+35zaaQhK1NzA4t9q1YZc3drjdfQ7WEIPywevA8hbSPTTt28W6FiEVxhISbBkrIQIDAQAB",
   "license": "LGPL 3.0",
   "preferences": [
