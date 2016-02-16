@@ -77,7 +77,8 @@ exports.restore = function () {
   }
 };
 exports.download = function (state) {
-  if (state && Storage.option["update"].value > Storage.when) return;
+  var when = parseInt(Date.now() / 1000);
+  if (state && Storage.option["update"].value > when) return;
 
   for (var i in Storage.player) {
     if ("online" in Storage.player[i]) {
@@ -86,5 +87,5 @@ exports.download = function (state) {
       Synchronize.fetch(link, file);
     }
   }
-  Preference.setValue(Storage.option["update"].prefs.name, Storage.when + Storage.option["period"].value * 86400);
+  Preference.setValue(Storage.option["update"].prefs.name, when + Storage.option["period"].value * 86400);
 };
