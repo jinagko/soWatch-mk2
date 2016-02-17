@@ -9,10 +9,6 @@
   "engines": {
     "firefox": ">=41.0a1"
   },
-  "permissions": {
-    "private-browsing": true,
-    "multiprocess": true
-  },
   "locales": {
     "ja": {
       "description": "中華動画サイトのユーザー体験を改善するアドオンです、中華本土の法律に違反するリスクがあるため、自己責任で使用してください！"
@@ -20,6 +16,10 @@
     "zh-CN": {
       "description": "本扩展旨在改善中国境内的视频网站的用户体验，它很可能会触犯中国国内的法律， 用户需自行承担使用风险！"
     }
+  },
+  "permissions": {
+    "private-browsing": true,
+    "multiprocess": true
   },
   "homepage": "https://github.com/jc3213/soWatch-mk2/",
   "updateURL": "https://raw.githubusercontent.com/jc3213/Misc/master/Update/soWatch_mk2.rdf",
