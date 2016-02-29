@@ -2,7 +2,7 @@
   "id": "sowatchmk2@jc3213.github",
   "title": "soWatch! mk2",
   "name": "sowatchmk2",
-  "version": "1.12.6",
+  "version": "1.12.5.1",
   "description": "This add-on intends to improve the user experience of Chinese video sites. It also has a high risk of violating the local law of China. Use at your own risk!",
   "main": "index.js",
   "author": "jc3213",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/jc3213/soWatch-mk2/",
   "updateURL": "https://raw.githubusercontent.com/jc3213/Misc/master/Update/soWatch_mk2.rdf",
-  "updateLink": "https://github.com/jc3213/soWatch-mk2/releases/download/1.12.6/sowatch_mk2-1.12.6-fx.xpi",
+  "updateLink": "https://github.com/jc3213/soWatch-mk2/releases/download/1.12.5/sowatch_mk2-1.12.5.1-fx.xpi",
   "updateKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8NYE9n9t9hlOg8lttm15fJJ9lyd0sqNcmrCxg2J0fcznCXExKSr5wgGzXzqXMljEV/qHWJdkzqjz2I0WZ7z9PAXmO/aFYfrGHDLrsA+hVAd+35zaaQhK1NzA4t9q1YZc3drjdfQ7WEIPywevA8hbSPTTt28W6FiEVxhISbBkrIQIDAQAB",
   "license": "LGPL 3.0",
   "preferences": [
