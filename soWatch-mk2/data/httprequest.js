@@ -59,7 +59,7 @@ var HttpRequest = {
     var httpChannel = subject.QueryInterface(Ci.nsIHttpChannel);
     HttpRequest.filter(httpChannel);
     if (!swf.matches(httpChannel.URI) && !xml.matches(httpChannel.URI)) return;
-    HttpRequest.player(httpChannel);
+    HttpRequest.player(subject, httpChannel);
   },
   filter: function (httpChannel) {
     for (var i in Storage.filter) {
