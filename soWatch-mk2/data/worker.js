@@ -9,6 +9,7 @@ var Synchronize = require("../lib/sync.js");
 function getRule(rulelist) {
   rulelist.forEach(function (element, index, array) {
     var name = element[0], player = element[1], remote = element[2], filter = element[3], string = element[4];
+
     if (player != undefined) {
       if (!remote) {
         Storage.player[name] = {
@@ -16,13 +17,14 @@ function getRule(rulelist) {
           pattern: Pattern.fromString(string)
         };
       } else {
-          Storage.player[name] = {
+        Storage.player[name] = {
           offline: Storage.file.path + player,
           online: Storage.file.link + player,
           pattern: Pattern.fromString(string)
         };
       }
     }
+
     if (filter != undefined) {
       Storage.filter[name] = {
         secured: filter,
@@ -37,8 +39,7 @@ function setRule(state, type, rulelist) {
     var object = Storage[type][element[0]];
     if (state == "on") {
       object["target"] = object["pattern"];
-    }
-    if (state == "off") {
+    } else if (state == "off") {
       object["target"] = null;
     }
   });
@@ -50,16 +51,22 @@ exports.pendingOption = function () {
 
     if (Storage.website[i].hasPlayer) {
       getRule(Storage.website[i].player);
-      if (Storage.website[i].value == 1) setRule("on", "player", Storage.website[i].player);
-      else setRule("off", "player", Storage.website[i].player);
+      if (Storage.website[i].value == 1) {
+        setRule("on", "player", Storage.website[i].player);
+      } else {
+        setRule("off", "player", Storage.website[i].player);
+      }
     } else {
       if (Storage.website[i].value == 1) Preference.resetValue(Storage.website[i].prefs);
     }
 
     if (Storage.website[i].hasFilter) {
       getRule(Storage.website[i].filter);
-      if (Storage.website[i].value == 2) setRule("on", "filter", Storage.website[i].filter);
-      else setRule("off", "filter", Storage.website[i].filter);
+      if (Storage.website[i].value == 2) {
+        setRule("on", "filter", Storage.website[i].filter);
+      } else {
+        setRule("off", "filter", Storage.website[i].filter);
+      }
     } else {
       if (Storage.website[i].value == 2) Preference.resetValue(Storage.website[i].prefs);
     }
@@ -72,6 +79,7 @@ exports.restore = function () {
     if (Storage.option[i].ignore) continue;
     Preference.resetValue(Storage.option[i].prefs);
   }
+
   for (var x in Storage.website) {
     Preference.resetValue(Storage.website[x].prefs);
   }
@@ -87,5 +95,6 @@ exports.download = function (state) {
       Synchronize.fetch(link, file);
     }
   }
+
   Preference.setValue(Storage.option["update"].prefs.name, when + Storage.option["period"].value * 86400);
 };
