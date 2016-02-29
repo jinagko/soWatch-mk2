@@ -9,13 +9,16 @@ var {NetUtil} = Cu.import("resource://gre/modules/NetUtil.jsm", {});
 var swf = Pattern.fromString("http://*/*.swf*");
 var xml = Pattern.fromString("http://*/*.xml*");
 
-function getFilter(rule, request) {
-  if (rule["secured"]) request.suspend();
-  else request.cancel(Cr.NS_BINDING_ABORTED);
+function getFilter(rule, httpChannel) {
+  if (rule["secured"]) {
+    httpChannel.suspend();
+  } else {
+    httpChannel.cancel(Cr.NS_BINDING_ABORTED);
+  }
 }
 
-function getPlayer(object, rule, request) {
-  request.suspend();
+function getPlayer(object, rule, httpChannel) {
+  httpChannel.suspend();
   NetUtil.asyncFetch(object, function (inputStream, status) {
     var binaryOutputStream = Cc["@mozilla.org/binaryoutputstream;1"].createInstance(Ci.nsIBinaryOutputStream);
     var storageStream = Cc["@mozilla.org/storagestream;1"].createInstance(Ci.nsIStorageStream);
@@ -26,7 +29,7 @@ function getPlayer(object, rule, request) {
     binaryOutputStream.writeBytes(data, count);
     rule["storageStream"] = storageStream;
     rule["count"] = count;
-    request.resume();
+    httpChannel.resume();
   });
 }
 
@@ -49,30 +52,31 @@ TrackingListener.prototype = {
 var HttpRequest = {
   observe: function (subject, topic, data) {
     if (topic == "http-on-examine-response") {
-      HttpRequest.filter(subject);
-      HttpRequest.player(subject);
+      HttpRequest.frontEnd(subject);
     }
   },
-  filter: function (subject) {
+  frontEnd: function (subject) {
     var httpChannel = subject.QueryInterface(Ci.nsIHttpChannel);
-
+    HttpRequest.filter(httpChannel);
+    if (!swf.matches(httpChannel.URI) && !xml.matches(httpChannel.URI)) return;
+    HttpRequest.player(httpChannel);
+  },
+  filter: function (httpChannel) {
     for (var i in Storage.filter) {
       var rule = Storage.filter[i];
       if (rule["target"] && rule["target"].matches(httpChannel.URI)) {
         if (i.includes("iqiyi")) {  // issue #7 细节补丁
           this.iqiyi ++;
-          if (this.iqiyi != 2) getFilter(rule, httpChannel);
+          if (this.iqiyi != 2) {
+            getFilter(rule, httpChannel);
+          }
         } else {
           getFilter(rule, httpChannel);
         }
       }
     }
   },
-  player: function (subject) {
-    var httpChannel = subject.QueryInterface(Ci.nsIHttpChannel);
-
-    if (!swf.matches(httpChannel.URI) && !xml.matches(httpChannel.URI)) return;
-
+  player: function (httpChannel) {
     for (var i in Storage.website) {
       if (Storage.website[i].onSite.matches(httpChannel.URI)) {
         if (i == "iqiyi") { // issues #7 前置补丁
