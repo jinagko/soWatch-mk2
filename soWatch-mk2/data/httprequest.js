@@ -76,7 +76,7 @@ var HttpRequest = {
       }
     }
   },
-  player: function (httpChannel) {
+  player: function (subject, httpChannel) {
     for (var i in Storage.website) {
       if (Storage.website[i].onSite.matches(httpChannel.URI)) {
         if (i == "iqiyi") { // issues #7 前置补丁
