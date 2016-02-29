@@ -54,7 +54,7 @@ function createTopItem(document, popup) {
 }
 
 function createSubItem(document, popup) {
-  var childList = {
+  var subMenuList = {
     player: "_options.Player",
     filter: "_options.Filter",
     none: "_options.None"
@@ -65,10 +65,10 @@ function createSubItem(document, popup) {
     separator.setAttribute("id", "sowatchmk2-separator-" + i);
     popup.appendChild(separator);
 
-    for (var x in childList) {
+    for (var x in subMenuList) {
       var item = document.createElement("menuitem");
       item.setAttribute("id", "sowatchmk2-" + i + "-" + x);
-      item.setAttribute("label", Locales(i + childList[x]));
+      item.setAttribute("label", Locales(i + subMenuList[x]));
       item.setAttribute("type", "radio");
       if (!Storage.website[i].hasPlayer && x == "player") item.setAttribute("disabled", "true");
       if (!Storage.website[i].hasFilter && x == "filter") item.setAttribute("disabled", "true");
@@ -84,8 +84,11 @@ function menuClick(event) {
       if (type == "command") {
         Worker[name]();
       } else if (type == "boolean") {
-        if (Storage.option[name].value) Preference.setValue(Storage.option[name].prefs.name, false);
-        else Preference.setValue(Storage.option[name].prefs.name, true);
+        if (Storage.option[name].value) {
+          Preference.setValue(Storage.option[name].prefs.name, false);
+        } else {
+          Preference.setValue(Storage.option[name].prefs.name, true);
+        }
       }
     }
   });
@@ -109,8 +112,11 @@ function menuPopup(event) {
     Storage.command.forEach(function (element, index, array) {
       var name = element[0], type = element[1];
       if (type == "boolean") {
-        if (Storage.option[name].value) event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "true");
-        else event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "false");
+        if (Storage.option[name].value) {
+          event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "true");
+        } else {
+          event.target.querySelector("#sowatchmk2-" + name).setAttribute("checked", "false");
+        }
       }
     });
 
