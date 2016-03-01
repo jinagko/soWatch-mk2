@@ -29,7 +29,7 @@ exports.website = [
     "iqiyi",
     0,
     "http://www.iqiyi.com/",
-    [true, [["iqiyi_v5", "iqiyi5.swf", true, null, "http://www.iqiyi.com/common/flashplayer/*/MainPlayer*.swf*"], ["iqiyi_out", "iqiyi_out.swf", true, null, "http://www.iqiyi.com/common/flashplayer/*/EnjoyPlayer*.swf*"]]],
+    [true, [["iqiyi_v5", "iqiyi5.swf", true, null, ["http://www.iqiyi.com/common/flashplayer/*/MainPlayer*.swf*", "http://www.iqiyi.com/common/flashplayer/*/1355f98c2359.swf*"]], ["iqiyi_out", "iqiyi_out.swf", true, null, "http://www.iqiyi.com/common/flashplayer/*/EnjoyPlayer*.swf*"]]],
     [true, [["iqiyi_filter", null, null, false, ["http://*/videos/other/*/*/*/*.f4v*", "http://data.video.qiyi.com/videos/other/*/*/*/*.hml*"]]]]
   ],
   [
