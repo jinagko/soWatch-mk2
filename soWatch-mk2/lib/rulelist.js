@@ -35,8 +35,8 @@ exports.website = [
   [
     "letv",
     0,
-    "http://www.letv.com/",
-    [true, [["letv_player", "letv.swf", true, null, ["http://player.letvcdn.com/*/*/*/*/*/*/newplayer/LetvPlayer.swf*", "http://player.letvcdn.com/*/*/*/*/newplayer/SDKLetvPlayer.swf*"]], ["letv_pccs", "http://www.letv.com/cmsdata/playerapi/pccs_sdk_20141113.xml", false, null, ["http://www.letv.com/cmsdata/playerapi/pccs_PlayerSDK*.xml*", "http://www.letv.com/cmsdata/playerapi/pccs_LiveSDK*.xml*"]]]],
+    "http://www.le.com/",
+    [true, [["letv_player", "letv.swf", true, null, ["http://player.letvcdn.com/*/*/*/*/*/*/newplayer/LetvPlayer.swf*", "http://player.letvcdn.com/*/*/*/*/newplayer/SDKLetvPlayer.swf*"]], ["letv_pccs", "http://www.le.com/cmsdata/playerapi/pccs_sdk_20141113.xml", false, null, ["http://www.le.com/cmsdata/playerapi/pccs_PlayerSDK*.xml*", "http://www.le.com/cmsdata/playerapi/pccs_LiveSDK*.xml*", "http://www.le.com/cmsdata/playerapi/pccs_main*.xml"]]]],
     [true, [["letv_filter", null, null, false, ["http://*/*/*/*/letv-gug/*/ver_*-avc-*-aac-*.letv*", "http://*.letvimg.com/lc*_gugwl/*/*/*/*/*", "http://*.letvimg.com/lc*_diany/*/*/*/*/*"]]]]
   ],
   [
